@@ -152,7 +152,7 @@ Minor changes to the Emitter class.
 - [`.depositMethods()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L927)
 - [`.depositAddresses()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L943)
 - [`.depositStatus()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L967)
-- [`.withdrawMethods()`]()
+- [`.withdrawMethods()`](https://github.com/just2102/node-kraken-api/blob/c5f2cea2183808cbafb3e586494909c084752090/index.ts#L943)
 - [`.withdrawInfo()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L987)
 - [`.withdrawStatus()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L1035)
 - [`.withdrawCancel()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L1055)
