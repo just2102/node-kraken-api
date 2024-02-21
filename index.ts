@@ -938,6 +938,26 @@ export class Kraken {
   }
 
   /**
+   * Retrieve a list of withdrawal methods available for the user.
+   */
+  public withdrawMethods(options: {
+    /**
+     * Asset being withdrawn (optional)
+     */
+    asset?: string;
+    /**
+     * Filter methods for specific asset class. Default: "currency"
+     */
+    aclass?: string;
+    /**
+     * Filter methods for specific network
+     */
+    network?: string;
+  }): Promise<Kraken.WithdrawMethods> {
+    return this.request("WithdrawMethods", options, "private");
+  }
+
+  /**
    * Retrieve (or generate a new) deposit addresses for a particular asset and method.
    */
   public depositAddresses(options: {
@@ -3308,6 +3328,33 @@ export module Kraken {
   }>;
   export module DepositMethods {
     export type Options = Exclude<FirstParam<Kraken["depositMethods"]>, undefined>;
+  }
+
+  // export type WithdrawMethods = Array
+  // an array of items with asset, method, network and minimum
+  export type WithdrawMethods = Array<{
+    /*· {*/
+
+    /**
+     * Asset being withdrawn.
+     */
+    asset: string;
+    /**
+     * Name of withdrawal method.
+     */
+    method: string;
+    /**
+     * Network name (null if fiat)
+     */
+    network: string | null;
+    /**
+     * Min withdrawal for this asset
+     */
+    minimum: string;
+  }>;
+
+  export module WithdrawMethods {
+    export type Options = Exclude<FirstParam<Kraken["withdrawMethods"]>, undefined>;
   }
 
   /**

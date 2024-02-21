@@ -27,8 +27,8 @@ WebSocket API Docs: [docs.kraken.com/websockets](https://docs.kraken.com/websock
 - `RetrieveExport` (binary endpoint); see the [example](#RetrieveExport).
 - Full WS orderbook mirroring and checksum validation.
 
-[CHANGELOG](https://github.com/jpcx/node-kraken-api/blob/2.2.2/CHANGELOG.md) | [Synopsis](#synopsis) | [Usage](#usage) | [Code](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts) |
-| --- | --- | --- | --- |
+| [CHANGELOG](https://github.com/jpcx/node-kraken-api/blob/2.2.2/CHANGELOG.md) | [Synopsis](#synopsis) | [Usage](#usage) | [Code](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts) |
+| ---------------------------------------------------------------------------- | --------------------- | --------------- | ------------------------------------------------------------------- |
 
 ### MIGRATION FROM 0.4.1:
 
@@ -80,17 +80,17 @@ If you're upgrading, please review the changes and upgrade guide below.
 #### Upgrade Guide
 
 1. Replace all calls to `.call()` with the corresponding named method or `.request()`.
-    - _Make sure to view the expected response types; they have changed since 0.4.1._
+   - _Make sure to view the expected response types; they have changed since 0.4.1._
 2. Replace all sync instances with an async loop that requests every few seconds.
-    - _If you are syncing one of the endpoints provided by WS, use that instead._
+   - _If you are syncing one of the endpoints provided by WS, use that instead._
 3. Ensure that your REST calls are not being made too quickly.
-    - _Ratelimiting has been removed; you may encounter server errors if you were relying on the limiter._
-    - _See the rate limits [documentation](https://docs.kraken.com/rest/#section/Rate-Limits)._
+   - _Ratelimiting has been removed; you may encounter server errors if you were relying on the limiter._
+   - _See the rate limits [documentation](https://docs.kraken.com/rest/#section/Rate-Limits)._
 4. Increase your api key nonce window if you're getting invalid nonce errors.
-    - _Calls may now be performed concurrently (global queueing is removed)._
+   - _Calls may now be performed concurrently (global queueing is removed)._
 5. Remove calls to `.setOTP()` and `Settings.otp`; provide `.genotp` in the settings.
 6. Review the error classes; if you were parsing errors you will need to update your catch statements.
-    - _Note: calls are no longer automatically retried `retryCt` times._
+   - _Note: calls are no longer automatically retried `retryCt` times._
 7. If you're constructing using module.exports (e.g. `const kraken = require('node-kraken-api')({...})`), you will need to use the `module.exports.Kraken` class instead: `import { Kraken } from "node-kraken-api"; const kraken = new Kraken({...});`
 
 </details>
@@ -108,9 +108,9 @@ Minor changes to the Emitter class.
     - _`(...args: <type>[]) => boolean` -> `(args: [<type>, <type>, ...]) => args is [<subtype>, <subtype>, ...]`_
 
 #### Removed
-  
+
 - Kraken.Emitter
-  
+
 </details>
 
 ## Synopsis <a name=synopsis />
@@ -152,6 +152,7 @@ Minor changes to the Emitter class.
 - [`.depositMethods()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L927)
 - [`.depositAddresses()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L943)
 - [`.depositStatus()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L967)
+- [`.withdrawMethods()`]()
 - [`.withdrawInfo()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L987)
 - [`.withdrawStatus()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L1035)
 - [`.withdrawCancel()`](https://github.com/jpcx/node-kraken-api/blob/2.2.2/index.ts#L1055)
@@ -241,8 +242,8 @@ new Kraken({
 const kraken = new Kraken();
 
 const { unixtime } = await kraken.time();
-const { XXBT }     = await kraken.assets();
-const ticker       = await kraken.ticker({ pair: "XXBTZUSD" })
+const { XXBT } = await kraken.assets();
+const ticker = await kraken.ticker({ pair: "XXBTZUSD" });
 ```
 
 #### Private
@@ -251,11 +252,11 @@ const ticker       = await kraken.ticker({ pair: "XXBTZUSD" })
 const kraken = new Kraken({ key: "...", secret: "..." });
 
 const { txid } = await kraken.addOrder({
-  pair:      "XXBTZUSD",
-  type:      "buy",
+  pair: "XXBTZUSD",
+  type: "buy",
   ordertype: "limit",
-  price:     "65432.1",
-  volume:    "1",
+  price: "65432.1",
+  volume: "1",
 });
 ```
 
@@ -271,8 +272,8 @@ RetrieveExport is the only method that promises a buffer:
 ```ts
 const kraken = new Kraken({ key: "...", secret: "..." });
 
-const buf = await kraken.retrieveExport({ id: "FOOB" })
-fs.writeFileSync("report.zip", buf)
+const buf = await kraken.retrieveExport({ id: "FOOB" });
+fs.writeFileSync("report.zip", buf);
 ```
 
 ### WebSockets
@@ -316,7 +317,8 @@ const kraken = new Kraken({ key: "...", secret: "..." });
 
 const { token } = await kraken.getWebSocketsToken();
 
-const orders = kraken.ws.openOrders({ token: token! })
+const orders = kraken.ws
+  .openOrders({ token: token! })
   .on("update", (update, sequence) => console.log(update, sequence))
   .subscribe();
 
@@ -331,6 +333,7 @@ await orders.unsubscribe();
 Testing is performed by [@jpcx/testts](https://github.com/jpcx/testts).
 
 To run tests:
+
 - Save an `auth.json` file with your key and secret: `{ key: string, secret: string }`
   - Please ensure that this key has **readonly** permissions.
 - Run `npm test` in the main directory.
