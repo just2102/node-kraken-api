@@ -940,7 +940,7 @@ export class Kraken {
   /**
    * Retrieve a list of withdrawal methods available for the user.
    */
-  public withdrawMethods(options: {
+  public withdrawMethods(options?: {
     /**
      * Asset being withdrawn (optional)
      */
