@@ -5475,6 +5475,7 @@ export module _Legacy {
           "CancelAll",
           "CancelAllOrdersAfter",
           "DepositMethods",
+          "WithdrawMethods",
           "DepositAddresses",
           "DepositStatus",
           "WithdrawInfo",
