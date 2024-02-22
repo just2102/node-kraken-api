@@ -781,6 +781,7 @@ export declare module Kraken {
     fee?: string | null;
     "address-setup-fee"?: string | null;
     "gen-address"?: boolean | null;
+    minimum: string;
   }>;
   module DepositMethods {
     type Options = Exclude<FirstParam<Kraken["depositMethods"]>, undefined>;

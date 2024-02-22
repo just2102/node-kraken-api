@@ -3331,7 +3331,10 @@ export module Kraken {
      * Whether new addresses can be generated for this method.
      */
     "gen-address"?: boolean | null;
-
+    /**
+     * Minimum net amount that can be deposited right now
+     */
+    minimum: string;
     /*· }*/
   }>;
   export module DepositMethods {
