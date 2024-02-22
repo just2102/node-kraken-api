@@ -3338,8 +3338,6 @@ export module Kraken {
     export type Options = Exclude<FirstParam<Kraken["depositMethods"]>, undefined>;
   }
 
-  // export type WithdrawMethods = Array
-  // an array of items with asset, method, network and minimum
   export type WithdrawMethods = Array<{
     /*· {*/
 
