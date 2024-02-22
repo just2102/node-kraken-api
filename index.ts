@@ -1722,6 +1722,14 @@ export module Kraken {
        * Scaling decimal places for output display.
        */
       display_decimals?: number | null;
+      /**
+       * Valuation as margin collateral (if applicable)
+       */
+      collateral_value: number;
+      /**
+       * Status of asset.
+       */
+      status: "enabled" | "deposit_only" | "withdrawal_only" | "funding_temporarily_disabled";
     };
 
     /*· }*/
